@@ -5,9 +5,7 @@ import { Injectable, WritableSignal, signal } from '@angular/core';
 })
 export class TokenService {
   private $accessToken: WritableSignal<string> = signal(
-    localStorage.getItem('accessToken')
-      ? JSON.stringify(localStorage.getItem('accessToken'))
-      : ''
+    localStorage.getItem('accessToken') ?? ''
   );
 
   setAccessToken(token: string) {
