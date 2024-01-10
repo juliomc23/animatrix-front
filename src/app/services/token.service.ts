@@ -1,24 +1,21 @@
 import { Injectable, WritableSignal, signal } from '@angular/core';
 
-export interface Tokens {
-  accessToken: string;
-  refreshToken: string;
-}
-
 @Injectable({
   providedIn: 'root',
 })
 export class TokenService {
-  private $tokens: WritableSignal<Tokens> = signal({
-    accessToken: '',
-    refreshToken: '',
-  });
+  private $accessToken: WritableSignal<string> = signal(
+    localStorage.getItem('accessToken')
+      ? JSON.stringify(localStorage.getItem('accessToken'))
+      : ''
+  );
 
-  setTokens(tokens: Tokens) {
-    this.$tokens.set(tokens);
+  setAccessToken(token: string) {
+    this.$accessToken.set(token);
+    localStorage.setItem('accessToken', token);
   }
 
-  getTokens() {
-    return this.$tokens();
+  getAccessToken() {
+    return this.$accessToken();
   }
 }

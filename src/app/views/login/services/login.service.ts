@@ -1,7 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { TokenService, Tokens } from '../../../services/token.service';
 import { Router } from '@angular/router';
+import { TokenService } from '../../../services/token.service';
+
+interface LoginResponse {
+  accessToken: string;
+}
 
 @Injectable({
   providedIn: 'root',
@@ -15,14 +19,14 @@ export class LoginService {
 
   login(email: string, password: string) {
     return this.httpClient
-      .post<Tokens>('http://localhost:3000/auth/login', {
+      .post<LoginResponse>('http://localhost:3000/auth/login', {
         email,
         password,
       })
       .subscribe({
         next: (res) => {
-          this.tokenService.setTokens(res);
-          if (this.tokenService.getTokens().accessToken)
+          this.tokenService.setAccessToken(res.accessToken);
+          if (this.tokenService.getAccessToken())
             this.router.navigate(['home']);
         },
 
