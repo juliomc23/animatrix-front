@@ -1,4 +1,9 @@
-<form [formGroup]="loginFormControl" (ngSubmit)="onSubmit()" class="login-form">
+<form
+  [formGroup]="loginFormControl"
+  (ngSubmit)="onSubmit()"
+  class="login-form"
+  autocomplete="off"
+>
   <section class="inputs-section">
     <label for="email" class="email-label">
       <span>Email</span>
