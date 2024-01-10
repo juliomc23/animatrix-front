@@ -1,5 +1,28 @@
-<form [formGroup]="loginFormControl" (ngSubmit)="onSubmit()">
-  <input type="email" formControlName="email" />
-  <input type="password" formControlName="password" />
-  <button type="submit">Login</button>
+<form [formGroup]="loginFormControl" (ngSubmit)="onSubmit()" class="login-form">
+  <section class="inputs-section">
+    <label for="email" class="email-label">
+      <span>Email</span>
+      <input
+        id="email"
+        type="email"
+        formControlName="email"
+        placeholder="Enter your email"
+      />
+    </label>
+    <label for="password" class="password-label">
+      <span>Password</span>
+      <div class="password-div-wrapper">
+        <input
+          id="password"
+          [type]="watchPassword ? 'text' : 'password'"
+          formControlName="password"
+          placeholder="Enter your password"
+        />
+        <span class="material-icons" (click)="toggleWatchPassword()">
+          {{ watchPassword ? "visibility" : "visibility_off" }}
+        </span>
+      </div>
+    </label>
+  </section>
+  <button type="submit" class="login-button">Login</button>
 </form>
