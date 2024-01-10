@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { LoginService } from '../../services/login.service';
 
 @Component({
   selector: 'app-login-form',
@@ -9,12 +10,15 @@ import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
   styleUrl: './login-form.component.css',
 })
 export class LoginFormComponent {
+  private loginService: LoginService = inject(LoginService);
   loginFormControl = new FormGroup({
     email: new FormControl(''),
     password: new FormControl(''),
   });
 
   onSubmit() {
-    console.log(this.loginFormControl.value);
+    const { email, password } = this.loginFormControl.value;
+
+    if (email && password) this.loginService.login(email, password);
   }
 }
