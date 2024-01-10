@@ -14,6 +14,12 @@ export const routes: Routes = [
     canActivate: [authGuard],
   },
   {
+    path: 'mangas',
+    loadComponent: () =>
+      import('./views/mangas/mangas.component').then((m) => m.MangasComponent),
+    canActivate: [authGuard],
+  },
+  {
     path: 'login',
     loadComponent: () =>
       import('./views/login/login.component').then((m) => m.LoginComponent),
