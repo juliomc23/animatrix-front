@@ -1,0 +1,11 @@
+<details>
+  <summary>{{ manga.name }}</summary>
+  <p>Chapter: {{ manga.chapter }}</p>
+  <p>Page: {{ manga.chapterPage }}</p>
+  @if(manga.nextChapter){
+  <p>Next chapter: {{ manga.nextChapter }}</p>
+  } @if(manga.comment){
+  <p>Manga comment: {{ manga.comment }}</p>
+  }
+  <a href="{{ manga.url }}">Read Manga Chapter</a>
+</details>

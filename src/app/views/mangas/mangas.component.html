@@ -1,45 +1,10 @@
 <section>
-  @if(!$newMangaModalOpen()){
-  <button (click)="handleOpenNewMangaModal()">Create new manga</button>
+  <app-create-manga-dialog />
+  @for(manga of $mangas(); track manga.name){
+  <app-manga-card [manga]="manga" />
   }
-  <dialog [open]="$newMangaModalOpen()">
-    <button (click)="handleOpenNewMangaModal()">Close</button>
-    <form [formGroup]="newMangaFormGroup" (ngSubmit)="createNewManga()">
-      <label>
-        Manga name:
-        <input type="text" formControlName="name" />
-      </label>
-      <label>
-        Manga chapter
-        <input type="number" formControlName="chapter" />
-      </label>
-      <label>
-        Chapter page
-        <input type="number" formControlName="chapterPage" />
-      </label>
-      <label>
-        Next chapter
-        <input type="number" formControlName="nextChapter" />
-      </label>
-      <label>
-        Manga comment
-        <textarea formControlName="comment"></textarea>
-      </label>
-      <label> Manga url <input type="text" formControlName="url" /></label>
-      <button type="submit">Create manga</button>
-    </form>
-  </dialog>
-  @for(manga of $mangas(); track manga){
-  <details>
-    <summary>{{ manga.name }}</summary>
-    <p>Chapter: {{ manga.chapter }}</p>
-    <p>Page: {{ manga.chapterPage }}</p>
-    @if(manga.nextChapter){
-    <p>Next chapter: {{ manga.nextChapter }}</p>
-    } @if(manga.comment){
-    <p>Manga comment: {{ manga.comment }}</p>
-    }
-    <a href="{{ manga.url }}">Read Manga Chapter</a>
-  </details>
-  }
+
+  <button (click)="add()">Add</button>
+
+  <p>Counter: {{ mangasService.$counter() }}</p>
 </section>

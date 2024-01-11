@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, WritableSignal, signal } from '@angular/core';
 import { Manga } from '../interfaces/manga.interface';
 import { TokenService } from '../../../services/token.service';
 
@@ -12,7 +12,10 @@ export class MangasService {
     private tokenService: TokenService
   ) {}
 
-  getMangas() {
+  private $mangas: WritableSignal<Manga[]> = signal<Manga[]>([]);
+  $counter: WritableSignal<number> = signal<number>(0);
+
+  getMangasSusbcription() {
     return this.httpClient.get<Manga[]>('http://localhost:3000/manga');
   }
 
@@ -24,4 +27,24 @@ export class MangasService {
       },
     });
   }
+
+  add() {
+    this.$counter.update((c) => c + 1);
+  }
+
+  substract() {
+    this.$counter.update((c) => c - 1);
+  }
+
+  // setMangas(mangas: Manga[]) {
+  //   this.$mangas.set(mangas);
+  // }
+
+  // setNewManga(manga: Manga) {
+  //   this.$mangas.update((mangas) => [...mangas, manga]);
+  // }
+
+  // getMangas() {
+  //   return this.$mangas();
+  // }
 }

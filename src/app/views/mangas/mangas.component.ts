@@ -3,71 +3,54 @@ import {
   Component,
   OnInit,
   WritableSignal,
+  effect,
   inject,
   signal,
 } from '@angular/core';
-import { MangasService } from './services/mangas.service';
+import { ReactiveFormsModule } from '@angular/forms';
+import { CreateMangaDialogComponent } from './components/create-manga-dialog/create-manga-dialog.component';
+import { MangaCardComponent } from './components/manga-card/manga-card.component';
 import { Manga } from './interfaces/manga.interface';
-import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { MangasService } from './services/mangas.service';
+import { NgFor } from '@angular/common';
 
 @Component({
   selector: 'app-mangas',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [
+    ReactiveFormsModule,
+    MangaCardComponent,
+    CreateMangaDialogComponent,
+    NgFor,
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './mangas.component.html',
   styleUrl: './mangas.component.css',
 })
-export class MangasComponent implements OnInit {
-  private mangasService = inject(MangasService);
-  $mangas: WritableSignal<Manga[]> = signal([]);
+export class MangasComponent {
+  mangasService = inject(MangasService);
 
-  $newMangaModalOpen = signal(false);
+  $mangas: WritableSignal<Manga[]> = signal<Manga[]>([]);
 
-  newMangaFormGroup = new FormGroup({
-    name: new FormControl(''),
-    chapter: new FormControl(),
-    chapterPage: new FormControl(),
-    nextChapter: new FormControl(null),
-    url: new FormControl(''),
-    comment: new FormControl(null),
-  });
-
-  ngOnInit(): void {
-    this.getMangas();
+  add() {
+    this.mangasService.add();
   }
 
-  handleOpenNewMangaModal() {
-    if (!this.$newMangaModalOpen()) {
-      this.$newMangaModalOpen.set(true);
-    } else {
-      this.$newMangaModalOpen.set(false);
-    }
+  substract() {
+    this.mangasService.substract();
   }
 
-  createNewManga() {
-    const manga = this.newMangaFormGroup.value;
-    const newManga = {
-      name: manga.name ?? '',
-      chapter: manga.chapter ?? 1,
-      chapterPage: manga.chapterPage ?? 1,
-      nextChapter: manga.nextChapter,
-      url: manga.url ?? '',
-      comment: manga.comment,
-    };
+  // ngOnInit(): void {
+  //   this.getMangas();
+  //   console.log(this.$mangas());
+  // }
 
-    this.mangasService.createManga(newManga).subscribe({
-      next: () => {
-        this.getMangas();
-        this.newMangaFormGroup.reset();
-      },
-      error: (err) => console.log(err),
-    });
-  }
-
-  getMangas() {
-    this.mangasService
-      .getMangas()
-      .subscribe({ next: (res) => this.$mangas.set(res) });
-  }
+  // getMangas() {
+  //   this.mangasService.getMangasSusbcription().subscribe({
+  //     next: (mangas) => {
+  //       this.mangasService.setMangas(mangas);
+  //     },
+  //     error: (err) => console.log(err),
+  //   });
+  // }
 }
