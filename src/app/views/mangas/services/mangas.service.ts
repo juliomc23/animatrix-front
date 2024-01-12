@@ -13,7 +13,6 @@ export class MangasService {
   ) {}
 
   private $mangas: WritableSignal<Manga[]> = signal<Manga[]>([]);
-  $counter: WritableSignal<number> = signal<number>(0);
 
   getMangasSusbcription() {
     return this.httpClient.get<Manga[]>('http://localhost:3000/manga');
@@ -28,23 +27,15 @@ export class MangasService {
     });
   }
 
-  add() {
-    this.$counter.update((c) => c + 1);
+  getMangas() {
+    return this.$mangas;
   }
 
-  substract() {
-    this.$counter.update((c) => c - 1);
+  setMangas(mangas: Manga[]) {
+    this.$mangas.set(mangas);
   }
 
-  // setMangas(mangas: Manga[]) {
-  //   this.$mangas.set(mangas);
-  // }
-
-  // setNewManga(manga: Manga) {
-  //   this.$mangas.update((mangas) => [...mangas, manga]);
-  // }
-
-  // getMangas() {
-  //   return this.$mangas();
-  // }
+  setNewManga(manga: Manga) {
+    this.$mangas.update((mangas) => [...mangas, manga]);
+  }
 }
