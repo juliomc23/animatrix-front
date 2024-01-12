@@ -50,14 +50,10 @@ export class CreateMangaDialogComponent {
 
     this.mangasService.createManga(newManga).subscribe({
       next: () => {
-        // this.mangasService.setNewManga(newManga);
+        this.mangasService.setNewManga(newManga);
         this.newMangaFormGroup.reset();
       },
       error: (err) => console.log(err),
     });
-  }
-
-  substract() {
-    this.mangasService.substract();
   }
 }
