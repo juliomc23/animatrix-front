@@ -3,8 +3,4 @@
   @for(manga of $mangas(); track manga.name){
   <app-manga-card [manga]="manga" />
   }
-
-  <button (click)="add()">Add</button>
-
-  <p>Counter: {{ mangasService.$counter() }}</p>
 </section>

@@ -28,29 +28,30 @@ import { NgFor } from '@angular/common';
   styleUrl: './mangas.component.css',
 })
 export class MangasComponent {
-  mangasService = inject(MangasService);
+  private mangasService = inject(MangasService);
 
-  $mangas: WritableSignal<Manga[]> = signal<Manga[]>([]);
+  $mangas: WritableSignal<Manga[]> = this.mangasService.getMangas();
 
-  add() {
-    this.mangasService.add();
+  constructor() {
+    effect(() => {
+      this.getMangas();
+    });
   }
 
-  substract() {
-    this.mangasService.substract();
+  ngOnInit(): void {
+    this.getMangasSubscription();
   }
 
-  // ngOnInit(): void {
-  //   this.getMangas();
-  //   console.log(this.$mangas());
-  // }
+  getMangasSubscription() {
+    this.mangasService.getMangasSusbcription().subscribe({
+      next: (mangas) => {
+        this.mangasService.setMangas(mangas);
+      },
+      error: (err) => console.log(err),
+    });
+  }
 
-  // getMangas() {
-  //   this.mangasService.getMangasSusbcription().subscribe({
-  //     next: (mangas) => {
-  //       this.mangasService.setMangas(mangas);
-  //     },
-  //     error: (err) => console.log(err),
-  //   });
-  // }
+  getMangas() {
+    this.$mangas = this.mangasService.getMangas();
+  }
 }
