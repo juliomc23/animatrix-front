@@ -6,11 +6,12 @@ import {
 } from '@angular/core';
 import { FormGroup, FormControl, ReactiveFormsModule } from '@angular/forms';
 import { MangasService } from '../../services/mangas.service';
+import { NgClass, NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-create-manga-dialog',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, NgClass, NgIf],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './create-manga-dialog.component.html',
   styleUrl: './create-manga-dialog.component.css',

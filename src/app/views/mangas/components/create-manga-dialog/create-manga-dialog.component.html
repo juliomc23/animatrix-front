@@ -1,30 +1,45 @@
-@if(!$newMangaModalOpen()){
-<button (click)="handleOpenNewMangaModal()">Create new manga</button>
-}
-<dialog [open]="$newMangaModalOpen()">
-  <button (click)="handleOpenNewMangaModal()">Close</button>
-  <form [formGroup]="newMangaFormGroup" (ngSubmit)="createNewManga()">
-    <label>
-      Manga name:
-      <input type="text" formControlName="name" />
-    </label>
-    <label>
-      Manga chapter
-      <input type="number" formControlName="chapter" />
-    </label>
-    <label>
-      Chapter page
-      <input type="number" formControlName="chapterPage" />
-    </label>
-    <label>
-      Next chapter
-      <input type="number" formControlName="nextChapter" />
-    </label>
-    <label>
-      Manga comment
-      <textarea formControlName="comment"></textarea>
-    </label>
-    <label> Manga url <input type="text" formControlName="url" /></label>
-    <button type="submit">Create manga</button>
-  </form>
+<button (click)="handleOpenNewMangaModal()" class="button__create-manga">
+  <span class="material-icons"> add </span>Create new manga
+</button>
+<dialog
+  [open]="$newMangaModalOpen()"
+  [ngClass]="{ 'dialog__create-manga--open': $newMangaModalOpen() }"
+>
+  <section class="section__create-manga">
+    <button (click)="handleOpenNewMangaModal()" class="button__close-modal">
+      <span class="material-icons"> close </span>
+    </button>
+    <form
+      [formGroup]="newMangaFormGroup"
+      (ngSubmit)="createNewManga()"
+      class="form__create-manga"
+    >
+      <label class="label__create-manga">
+        Manga name
+        <input type="text" formControlName="name" />
+      </label>
+      <label class="label__create-manga">
+        Manga chapter
+        <input type="number" formControlName="chapter" />
+      </label>
+      <label class="label__create-manga">
+        Chapter page
+        <input type="number" formControlName="chapterPage" />
+      </label>
+      <label class="label__create-manga">
+        Next chapter
+        <input type="number" formControlName="nextChapter" />
+      </label>
+      <label class="label__create-manga">
+        Manga comment
+        <textarea formControlName="comment"></textarea>
+      </label>
+      <label class="label__create-manga">
+        Manga url <input type="text" formControlName="url"
+      /></label>
+      <button type="submit" class="button__create-newmanga">
+        Create manga
+      </button>
+    </form>
+  </section>
 </dialog>
