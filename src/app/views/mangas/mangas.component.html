@@ -1,6 +1,6 @@
 <app-create-manga-dialog />
+@for(manga of $mangas(); track manga.name){
 <section class="mangas-section">
-  @for(manga of $mangas(); track manga.name){
   <app-manga-card [manga]="manga" />
-  }
 </section>
+}

@@ -1,18 +1,15 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  OnInit,
   WritableSignal,
   effect,
   inject,
-  signal,
 } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CreateMangaDialogComponent } from './components/create-manga-dialog/create-manga-dialog.component';
 import { MangaCardComponent } from './components/manga-card/manga-card.component';
 import { Manga } from './interfaces/manga.interface';
 import { MangasService } from './services/mangas.service';
-import { NgFor } from '@angular/common';
 
 @Component({
   selector: 'app-mangas',
@@ -21,7 +18,6 @@ import { NgFor } from '@angular/common';
     ReactiveFormsModule,
     MangaCardComponent,
     CreateMangaDialogComponent,
-    NgFor,
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './mangas.component.html',
