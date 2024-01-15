@@ -1,6 +1,13 @@
 <h2>Mangas</h2>
-@for(manga of $mangas() | slice:0:2 ; track manga.name ){
+@for(manga of $mangas() | slice:0:5; track manga.name ){
 <section class="mangas-section">
-  <app-manga-card [manga]="manga" />
+  <app-resource-card resourceType="manga" [mangaResource]="manga" />
+</section>
+}
+
+<h2>Animes</h2>
+@for(anime of $animes() | slice:0:5; track anime.id ){
+<section class="mangas-section">
+  <app-resource-card resourceType="anime" [animeResource]="anime" />
 </section>
 }
