@@ -1,1 +1,6 @@
-<p>home works!</p>
+<h2>Mangas</h2>
+@for(manga of $mangas() | slice:0:2 ; track manga.name ){
+<section class="mangas-section">
+  <app-manga-card [manga]="manga" />
+</section>
+}
