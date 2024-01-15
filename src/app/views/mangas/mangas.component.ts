@@ -6,8 +6,8 @@ import {
   inject,
 } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
-import { CreateMangaDialogComponent } from './components/create-manga-dialog/create-manga-dialog.component';
-import { MangaCardComponent } from './components/manga-card/manga-card.component';
+import { CreateResourceDialogComponent } from '../../components/create-resource-dialog/create-resource-dialog.component';
+import { ResourceCardComponent } from '../../components/resource-card/resource-card.component';
 import { Manga } from './interfaces/manga.interface';
 import { MangasService } from './services/mangas.service';
 
@@ -16,8 +16,8 @@ import { MangasService } from './services/mangas.service';
   standalone: true,
   imports: [
     ReactiveFormsModule,
-    MangaCardComponent,
-    CreateMangaDialogComponent,
+    CreateResourceDialogComponent,
+    ResourceCardComponent,
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './mangas.component.html',
