@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { MangaCardComponent } from './manga-card.component';
+import { ResourceCardComponent } from './resource-card.component';
 
-describe('MangaCardComponent', () => {
-  let component: MangaCardComponent;
-  let fixture: ComponentFixture<MangaCardComponent>;
+describe('ResourceCardComponent', () => {
+  let component: ResourceCardComponent;
+  let fixture: ComponentFixture<ResourceCardComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [MangaCardComponent]
+      imports: [ResourceCardComponent]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(MangaCardComponent);
+    fixture = TestBed.createComponent(ResourceCardComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -3,7 +3,7 @@
   background-color: rgb(160, 204, 204);
   padding: 0.5rem 0.5rem;
 }
-.manga-card {
+.resource-card {
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -12,12 +12,12 @@
   text-transform: capitalize;
   font-size: 1.3rem;
 
-  .manga-card__title {
+  .resource-card__title {
     list-style: none;
     font-size: 1.5rem;
   }
 
-  .manga-card__link {
+  .resource-card__link {
     all: unset;
     background-color: aliceblue;
     padding: 0.5rem 1rem;

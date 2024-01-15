@@ -1,0 +1,44 @@
+<span class="material-icons"> expand_more </span>
+<details class="resource-card">
+  <summary class="resource-card__title">
+    {{ resourceType === "anime" ? animeResource.name : mangaResource.name }}
+  </summary>
+  <p>
+    {{ resourceType === "anime" ? "Episode" : "Chapter" }}:
+    {{
+    resourceType === "anime" ? animeResource.episode : mangaResource.chapter
+    }}
+  </p>
+  <p>
+    {{ resourceType === "anime" ? "Minute" : "Page" }}:
+    {{
+    resourceType === "anime"
+    ? animeResource.episodeMinute
+    : mangaResource.chapterPage
+    }}
+  </p>
+  <p>
+    @if(resourceType === "anime"){
+    @if(animeResource.nextEpisode){
+  <p>Next episode: {{ animeResource.nextEpisode }}</p>
+  }
+  }@else {
+  @if(mangaResource.nextChapter){
+  <p>Next chapter: {{ mangaResource.nextChapter }}</p>
+  }
+  }
+  </p>
+  <p>
+    @if(resourceType === "anime"){
+    @if(animeResource.comment){
+  <p>Comment: {{ animeResource.nextEpisode }}</p>
+  }
+  }@else {
+  @if(mangaResource.comment){
+  <p>Comment: {{ mangaResource.nextChapter }}</p>
+  }
+  }
+  </p>
+  <a [href]="resourceType === 'anime' ? animeResource.url : mangaResource.url" target="_blank"
+    class="resource-card__link">{{ resourceType === "anime" ? "Watch Anime Episode" : "Read Manga Chapter" }}</a>
+</details>
