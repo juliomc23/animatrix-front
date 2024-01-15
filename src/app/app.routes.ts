@@ -20,6 +20,11 @@ export const routes: Routes = [
     canActivate: [authGuard],
   },
   {
+    path: 'animes',
+    loadComponent: () =>
+      import('./views/animes/animes.component').then((m) => m.AnimesComponent),
+  },
+  {
     path: 'login',
     loadComponent: () =>
       import('./views/login/login.component').then((m) => m.LoginComponent),

@@ -1,0 +1,6 @@
+<app-create-resource-dialog resourceType="anime" />
+@for(anime of $animes(); track anime.id){
+<section class="animes-section">
+  <app-resource-card resourceType="anime" [animeResource]="anime" />
+</section>
+}
