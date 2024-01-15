@@ -1,0 +1,58 @@
+<button (click)="openModal()" class="button__create-resource">
+  <span class="material-icons"> add </span
+  >{{ resourceType === "anime" ? "Create new anime" : "Create new manga" }}
+</button>
+<dialog
+  [open]="$resourceModalOpen()"
+  [ngClass]="{ 'dialog__create-resource--open': $resourceModalOpen() }"
+>
+  <section class="section__create-resource">
+    <button (click)="closeModal()" class="button__close-modal">
+      <span class="material-icons"> close </span>
+    </button>
+    <form
+      (ngSubmit)="createResource()"
+      [formGroup]="resourceFormGroup"
+      class="form__create-resource"
+    >
+      <label class="label__create-resource">
+        Name
+        <input type="text" formControlName="name" />
+      </label>
+      <label class="label__create-resource">
+        {{ resourceType === "anime" ? "Episode" : "Chapter" }}
+        <input
+          type="number"
+          [formControlName]="resourceType === 'anime' ? 'episode' : 'chapter'"
+        />
+      </label>
+      <label class="label__create-resource">
+        {{ resourceType === "anime" ? "Episode minute" : "Chapter page" }}
+        <input
+          type="number"
+          [formControlName]="
+            resourceType === 'anime' ? 'episodeMinute' : 'chapterPage'
+          "
+        />
+      </label>
+      <label class="label__create-resource">
+        {{ resourceType === "anime" ? "Next episode" : "Next chapter" }}
+        <input
+          type="number"
+          [formControlName]="
+            resourceType === 'anime' ? 'nextEpisode' : 'nextChapter'
+          "
+        />
+      </label>
+      <label class="label__create-resource">
+        Comment
+        <textarea formControlName="comment"></textarea>
+      </label>
+      <label class="label__create-resource">
+        Url
+        <input type="text" formControlName="url" />
+      </label>
+      <button type="submit" class="button__create-new">Create</button>
+    </form>
+  </section>
+</dialog>
