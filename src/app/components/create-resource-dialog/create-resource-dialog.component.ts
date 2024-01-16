@@ -1,15 +1,10 @@
 import { NgClass } from '@angular/common';
 import { Component, Input, OnInit, inject, signal } from '@angular/core';
-import {
-  FormControl,
-  FormGroup,
-  ReactiveFormsModule,
-  Validators,
-} from '@angular/forms';
-import { MangasService } from '../../views/mangas/services/mangas.service';
-import { Manga } from '../../views/mangas/interfaces/manga.interface';
+import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { AnimeResponse } from '../../views/animes/interfaces/anime.interface';
 import { AnimesService } from '../../views/animes/services/animes.service';
+import { Manga } from '../../views/mangas/interfaces/manga.interface';
+import { MangasService } from '../../views/mangas/services/mangas.service';
 
 type MangaFormGroup = {
   name: FormControl<string>;
