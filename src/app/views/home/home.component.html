@@ -6,7 +6,7 @@
 }
 
 <h2>Animes</h2>
-@for(anime of $animes() | slice:0:5; track anime.id ){
+@for(anime of $animes() | slice:0:5; track anime.name ){
 <section class="mangas-section">
   <app-resource-card resourceType="anime" [animeResource]="anime" />
 </section>

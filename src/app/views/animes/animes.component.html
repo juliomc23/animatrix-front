@@ -1,6 +1,8 @@
 <app-create-resource-dialog resourceType="anime" />
-@for(anime of $animes(); track anime.id){
+@for(anime of $animes(); track anime.name){
 <section class="animes-section">
   <app-resource-card resourceType="anime" [animeResource]="anime" />
 </section>
+}@empty {
+<h2>No animes found create someone</h2>
 }

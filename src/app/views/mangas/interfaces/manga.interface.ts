@@ -1,4 +1,5 @@
 export interface Manga {
+  id: number;
   name: string;
   chapter: number;
   chapterPage: number;

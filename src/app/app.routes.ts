@@ -23,6 +23,7 @@ export const routes: Routes = [
     path: 'animes',
     loadComponent: () =>
       import('./views/animes/animes.component').then((m) => m.AnimesComponent),
+    canActivate: [authGuard],
   },
   {
     path: 'login',

@@ -18,7 +18,7 @@ export class MangasService {
     return this.httpClient.get<Manga[]>('http://localhost:3000/manga');
   }
 
-  createManga(manga: Manga) {
+  createManga(manga: Partial<Manga>) {
     return this.httpClient.post<Manga>('http://localhost:3000/manga', manga, {
       headers: {
         'Content-Type': 'application/json',

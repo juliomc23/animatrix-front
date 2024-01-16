@@ -1,4 +1,6 @@
-<span class="material-icons"> expand_more </span>
+<button class="expand_more--button">
+  <span class="material-icons"> expand_more </span>
+</button>
 <details class="resource-card">
   <summary class="resource-card__title">
     {{ resourceType === "anime" ? animeResource.name : mangaResource.name }}
@@ -31,14 +33,19 @@
   <p>
     @if(resourceType === "anime"){
     @if(animeResource.comment){
-  <p>Comment: {{ animeResource.nextEpisode }}</p>
+  <p>Comment: {{ animeResource.comment }}</p>
   }
   }@else {
   @if(mangaResource.comment){
-  <p>Comment: {{ mangaResource.nextChapter }}</p>
+  <p>Comment: {{ mangaResource.comment }}</p>
   }
   }
   </p>
-  <a [href]="resourceType === 'anime' ? animeResource.url : mangaResource.url" target="_blank"
-    class="resource-card__link">{{ resourceType === "anime" ? "Watch Anime Episode" : "Read Manga Chapter" }}</a>
+  <a [href]="getResourceUrl(resourceType)" target="_blank" 
+    class="resource-card__link">{{getLinkText(resourceType)}}</a>
 </details>
+<button class="delete__resource--button" (click)="resourceType === 'anime' ? deleteResource(animeResource.id) : deleteResource(mangaResource.id)">
+  <span class="material-icons">
+  delete
+  </span>
+</button>
