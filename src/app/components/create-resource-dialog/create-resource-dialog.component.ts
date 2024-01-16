@@ -24,43 +24,12 @@ type MangaFormGroup = {
 })
 export class CreateResourceDialogComponent implements OnInit {
   @Input({ required: true }) resourceType!: 'anime' | 'manga';
-  $resourceModalOpen = signal<boolean>(false);
-  resourceFormGroup!: FormGroup;
 
   private mangasService = inject(MangasService);
   private animesService = inject(AnimesService);
 
-  ngOnInit(): void {
-    this.asignFormGroup();
-  }
-
-  createResource() {
-    if (this.resourceType === 'manga') {
-      const newManga = this.getMangaFormValues();
-      this.mangasService.createManga(newManga).subscribe({
-        next: (res) => {
-          this.mangasService.setNewManga(res);
-        },
-      });
-    }
-
-    if (this.resourceType === 'anime') {
-      const newAnime = this.getAnimeFormValues();
-      this.animesService.createAnimeSubscription(newAnime).subscribe({
-        next: (res) => this.animesService.setNewAnime(res),
-      });
-    }
-
-    this.resourceFormGroup.reset();
-  }
-
-  closeModal() {
-    this.$resourceModalOpen.set(false);
-  }
-
-  openModal() {
-    this.$resourceModalOpen.set(true);
-  }
+  $resourceModalOpen = signal<boolean>(false);
+  resourceFormGroup!: FormGroup;
 
   private asignFormGroup(): void {
     if (this.resourceType === 'anime')
@@ -118,5 +87,37 @@ export class CreateResourceDialogComponent implements OnInit {
       return 'https://' + url;
     }
     return url;
+  }
+
+  ngOnInit(): void {
+    this.asignFormGroup();
+  }
+
+  createResource() {
+    if (this.resourceType === 'manga') {
+      const newManga = this.getMangaFormValues();
+      this.mangasService.createManga(newManga).subscribe({
+        next: (res) => {
+          this.mangasService.setNewManga(res);
+        },
+      });
+    }
+
+    if (this.resourceType === 'anime') {
+      const newAnime = this.getAnimeFormValues();
+      this.animesService.createAnimeSubscription(newAnime).subscribe({
+        next: (res) => this.animesService.setNewAnime(res),
+      });
+    }
+
+    this.resourceFormGroup.reset();
+  }
+
+  closeModal() {
+    this.$resourceModalOpen.set(false);
+  }
+
+  openModal() {
+    this.$resourceModalOpen.set(true);
   }
 }
