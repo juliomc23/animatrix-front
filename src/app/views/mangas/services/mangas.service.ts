@@ -27,6 +27,14 @@ export class MangasService {
     });
   }
 
+  deleteMangaSubscription(id: number) {
+    return this.httpClient.delete(`http://localhost:3000/manga/${id}`, {
+      headers: {
+        Authorization: `Bearer ${this.tokenService.getAccessToken()}`,
+      },
+    });
+  }
+
   getMangas() {
     return this.$mangas;
   }
@@ -37,5 +45,9 @@ export class MangasService {
 
   setNewManga(manga: Manga) {
     this.$mangas.update((mangas) => [...mangas, manga]);
+  }
+
+  deleteManga(id: number) {
+    this.$mangas.update((mangas) => mangas.filter((manga) => manga.id !== id));
   }
 }
