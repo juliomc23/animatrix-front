@@ -5,7 +5,8 @@ import { Manga } from '../mangas/interfaces/manga.interface';
 import { MangasService } from '../mangas/services/mangas.service';
 import { AnimesService } from '../animes/services/animes.service';
 import { AnimeResponse } from '../animes/interfaces/anime.interface';
-import { RouterLink } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
+import { RouterService } from '../../services/router.service';
 
 @Component({
   selector: 'app-home',
@@ -21,6 +22,9 @@ export class HomeComponent {
   $mangas: WritableSignal<Manga[]> = this.mangasService.getMangas();
   $animes: WritableSignal<AnimeResponse[]> = this.animesService.getAnimes();
 
+  private route = inject(ActivatedRoute);
+  private routerService = inject(RouterService);
+
   constructor() {
     effect(() => {
       this.getMangas();
@@ -29,8 +33,15 @@ export class HomeComponent {
   }
 
   ngOnInit(): void {
+    this.getActualRoute();
     this.getMangasSubscription();
     this.getAnimesSubscription();
+  }
+  getActualRoute() {
+    this.route.url.subscribe(([url]) => {
+      const { path } = url;
+      this.routerService.setRoute(path);
+    });
   }
 
   getMangasSubscription() {

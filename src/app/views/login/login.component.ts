@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { RouterService } from '../../services/router.service';
 import { LoginFormComponent } from './components/login-form/login-form.component';
 
 @Component({
@@ -8,4 +10,18 @@ import { LoginFormComponent } from './components/login-form/login-form.component
   templateUrl: './login.component.html',
   styleUrl: './login.component.css',
 })
-export class LoginComponent {}
+export class LoginComponent {
+  private route = inject(ActivatedRoute);
+  private routerService = inject(RouterService);
+
+  ngOnInit() {
+    this.getActualRoute();
+  }
+
+  getActualRoute() {
+    this.route.url.subscribe(([url]) => {
+      const { path } = url;
+      this.routerService.setRoute(path);
+    });
+  }
+}
