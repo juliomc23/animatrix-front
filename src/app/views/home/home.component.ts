@@ -5,11 +5,12 @@ import { Manga } from '../mangas/interfaces/manga.interface';
 import { MangasService } from '../mangas/services/mangas.service';
 import { AnimesService } from '../animes/services/animes.service';
 import { AnimeResponse } from '../animes/interfaces/anime.interface';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [ResourceCardComponent, SlicePipe],
+  imports: [ResourceCardComponent, SlicePipe, RouterLink],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css',
 })

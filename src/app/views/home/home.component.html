@@ -3,6 +3,8 @@
 <section class="mangas-section">
   <app-resource-card resourceType="manga" [mangaResource]="manga" />
 </section>
+}@empty {
+<h2>No mangas found, lets <a routerLink="/mangas">create someone</a></h2>
 }
 
 <h2>Animes</h2>
@@ -10,4 +12,6 @@
 <section class="mangas-section">
   <app-resource-card resourceType="anime" [animeResource]="anime" />
 </section>
+}@empty {
+<h2>No animes found, lets <a routerLink="/animes">create someone</a></h2>
 }
