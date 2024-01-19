@@ -15,7 +15,11 @@ export class AnimesService {
   $animes = signal<AnimeResponse[]>([]);
 
   getAnimesSubscription() {
-    return this.httpClient.get<AnimeResponse[]>('http://localhost:3000/anime');
+    return this.httpClient.get<AnimeResponse[]>('http://localhost:3000/anime', {
+      headers: {
+        Authorization: `Bearer ${this.tokenService.getAccessToken()}`,
+      },
+    });
   }
 
   createAnimeSubscription(anime: Partial<AnimeResponse>) {

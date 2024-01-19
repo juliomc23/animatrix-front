@@ -15,7 +15,11 @@ export class MangasService {
   private $mangas: WritableSignal<Manga[]> = signal<Manga[]>([]);
 
   getMangasSusbcription() {
-    return this.httpClient.get<Manga[]>('http://localhost:3000/manga');
+    return this.httpClient.get<Manga[]>('http://localhost:3000/manga', {
+      headers: {
+        Authorization: `Bearer ${this.tokenService.getAccessToken()}`,
+      },
+    });
   }
 
   createManga(manga: Partial<Manga>) {
