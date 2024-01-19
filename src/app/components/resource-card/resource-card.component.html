@@ -44,8 +44,15 @@
   <a [href]="getResourceUrl(resourceType)" target="_blank" 
     class="resource-card__link">{{getLinkText(resourceType)}}</a>
 </details>
-<button class="delete__resource--button" (click)="resourceType === 'anime' ? deleteResource(animeResource.id) : deleteResource(mangaResource.id)">
-  <span class="material-icons">
-  delete
-  </span>
-</button>
+<section class="edit-delete__resource">
+  <button class="edit__resource--button" (click)="resourceType === 'anime' ? deleteResource(animeResource.id) : deleteResource(mangaResource.id)">
+   <span class="edit-icon material-icons">
+    edit
+    </span>
+  </button>
+  <button class="delete__resource--button" (click)="resourceType === 'anime' ? deleteResource(animeResource.id) : deleteResource(mangaResource.id)">
+    <span class="delete-icon material-icons">
+    delete
+    </span>
+  </button>
+</section>
