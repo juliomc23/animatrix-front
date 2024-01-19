@@ -42,10 +42,10 @@
   .section__create-resource {
     display: flex;
     flex-direction: column;
-    width: 50%;
+    width: 90%;
     gap: 1rem;
     padding: 1rem;
-    background-color: antiquewhite;
+    background-color: #d89739;
     border: 1px solid black;
 
     .button__close-modal {
