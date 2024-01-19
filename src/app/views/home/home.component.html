@@ -1,17 +1,17 @@
-<h2>Mangas</h2>
+<h2 class="home__title">Mangas</h2>
 @for(manga of $mangas() | slice:0:5; track manga.name ){
-<section class="mangas-section">
-  <app-resource-card resourceType="manga" [mangaResource]="manga" />
-</section>
+<app-resource-card resourceType="manga" [mangaResource]="manga" />
 }@empty {
-<h2>No mangas found, lets <a routerLink="/mangas">create someone</a></h2>
+<span class="no-animes__message"
+  >No mangas found, lets <a routerLink="/mangas">create someone</a></span
+>
 }
 
-<h2>Animes</h2>
+<h2 class="home__title">Animes</h2>
 @for(anime of $animes() | slice:0:5; track anime.name ){
-<section class="mangas-section">
-  <app-resource-card resourceType="anime" [animeResource]="anime" />
-</section>
+<app-resource-card resourceType="anime" [animeResource]="anime" />
 }@empty {
-<h2>No animes found, lets <a routerLink="/animes">create someone</a></h2>
+<span class="no-animes__message"
+  >No animes found, lets <a routerLink="/animes">create someone</a></span
+>
 }

@@ -1,6 +1,7 @@
 :host {
   display: flex;
-  background-color: rgb(160, 204, 204);
+  width: 90%;
+  background-color: #d89739;
   padding: 0.5rem 0.5rem;
 }
 .expand_more--button {

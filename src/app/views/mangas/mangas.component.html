@@ -1,8 +1,6 @@
 <app-create-resource-dialog resourceType="manga" />
 @for(manga of $mangas(); track manga.name){
-<section class="mangas-section">
-  <app-resource-card resourceType="manga" [mangaResource]="manga" />
-</section>
+<app-resource-card resourceType="manga" [mangaResource]="manga" />
 }@empty {
 <h2>No mangas found create someone</h2>
 }
