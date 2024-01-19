@@ -43,6 +43,19 @@ export class AnimesService {
     });
   }
 
+  editAnimeSubscription(id: number, anime: Partial<AnimeResponse>) {
+    return this.httpClient.patch<AnimeResponse>(
+      `http://localhost:3000/anime/${id}`,
+      anime,
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${this.tokenService.getAccessToken()}`,
+        },
+      }
+    );
+  }
+
   getAnimes() {
     return this.$animes;
   }
