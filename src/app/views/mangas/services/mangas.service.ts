@@ -39,6 +39,19 @@ export class MangasService {
     });
   }
 
+  editMangaSubscription(id: number, anime: Partial<Manga>) {
+    return this.httpClient.patch<Manga>(
+      `http://localhost:3000/manga/${id}`,
+      anime,
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${this.tokenService.getAccessToken()}`,
+        },
+      }
+    );
+  }
+
   getMangas() {
     return this.$mangas;
   }
