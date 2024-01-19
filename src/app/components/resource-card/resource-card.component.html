@@ -45,12 +45,12 @@
     class="resource-card__link">{{getLinkText(resourceType)}}</a>
 </details>
 <section class="edit-delete__resource">
-  <button class="edit__resource--button" (click)="resourceType === 'anime' ? deleteResource(animeResource.id) : deleteResource(mangaResource.id)">
+  <button class="edit__resource--button" (click)="resourceType === 'anime' ? manageResource(animeResource.id, 'edit') : manageResource(mangaResource.id, 'edit')">
    <span class="edit-icon material-icons">
     edit
     </span>
   </button>
-  <button class="delete__resource--button" (click)="resourceType === 'anime' ? deleteResource(animeResource.id) : deleteResource(mangaResource.id)">
+  <button class="delete__resource--button" (click)="resourceType === 'anime' ? manageResource(animeResource.id, 'delete') : manageResource(mangaResource.id, 'delete')">
     <span class="delete-icon material-icons">
     delete
     </span>

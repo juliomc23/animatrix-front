@@ -37,7 +37,27 @@ export class ResourceCardComponent {
       : 'Read Manga Chapter';
   }
 
-  deleteResource(id: number) {
+  manageResource(id: number, editOrDelete: 'edit' | 'delete') {
+    if (editOrDelete === 'edit') {
+      this.editResource(id);
+    }
+
+    if (editOrDelete === 'delete') {
+      this.deleteResource(id);
+    }
+  }
+
+  private editResource(id: number) {
+    if (this.resourceType === 'anime') {
+      //TODO: edit anime
+    }
+
+    if (this.resourceType === 'manga') {
+      //TODO: edit manga
+    }
+  }
+
+  private deleteResource(id: number) {
     if (this.resourceType === 'anime') {
       this.animesService.deleteAnimeSubscription(id).subscribe({
         next: () => this.animesService.deleteAnime(id),
