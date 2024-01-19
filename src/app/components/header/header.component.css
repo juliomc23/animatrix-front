@@ -1,27 +1,42 @@
 .header {
-  height: 3rem;
+  height: 5rem;
   display: flex;
   align-items: center;
-  background-color: antiquewhite;
+  background-color: #1b3073;
 
   .navbar {
     width: 100%;
     display: flex;
-    gap: 2rem;
-    padding-left: 1rem;
-    padding-right: 1rem;
+    justify-content: space-evenly;
+    gap: 1rem;
     box-sizing: border-box;
-    font-size: 1.2rem;
-    text-decoration: underline;
+    font-size: 1.5rem;
 
-    .router__link {
+    .logo-link__container {
       display: flex;
-      color: black;
+      flex-direction: column;
+      align-items: center;
+      text-decoration: none;
+
+      .link-img {
+        width: 2rem;
+        height: 2rem;
+      }
     }
 
     .logout__link {
       all: unset;
-      margin-left: auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      color: white;
+
+      .material-icons {
+        font-size: 2rem;
+      }
     }
+  }
+  .router__link {
+    color: white;
   }
 }

@@ -1,9 +1,31 @@
 <header class="header">
   <nav class="navbar">
-    <a routerLink="/home" class="router__link">Home</a>
-    <a routerLink="/mangas" class="router__link">Mangas</a>
-    <a routerLink="/animes" class="router__link">Animes</a>
+    <a routerLink="/home" class="logo-link__container">
+      <img
+        src="/assets/icons/pokeball.png"
+        alt="pokeball"
+        class="link-img pokeball-img"
+      />
+      <span class="router__link">Home</span>
+    </a>
+    <a routerLink="/mangas" class="logo-link__container">
+      <img
+        src="/assets/icons/akatsuki.png"
+        alt="akatsuki"
+        class="link-img akatsuki-img"
+      />
+      <span class="router__link">Mangas</span>
+    </a>
+    <a routerLink="/animes" class="logo-link__container">
+      <img
+        src="/assets/icons/dragon_ball.png"
+        alt="dragon_ball"
+        class="link-img dragon_ball-img"
+      />
+      <span routerLink="/animes" class="router__link">Animes</span>
+    </a>
     <button (click)="logout()" class="router__link logout__link">
+      <span class="material-icons"> logout </span>
       Log out
     </button>
   </nav>
