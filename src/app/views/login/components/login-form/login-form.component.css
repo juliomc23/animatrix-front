@@ -9,14 +9,13 @@
   gap: 5rem;
   box-sizing: border-box;
   border-radius: 1rem;
-  border: 1px solid rgb(117, 117, 117);
-  background-color: antiquewhite;
+  background-color: rgba(252, 252, 252, 0.863);
 
   .inputs-section {
     width: 100%;
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+    gap: 3rem;
 
     .email-label,
     .password-label {
@@ -36,6 +35,10 @@
         cursor: text;
         font-size: 1.3rem;
         padding: 0.5rem;
+
+        &::placeholder {
+          color: rgb(56, 56, 56);
+        }
       }
 
       .password-div-wrapper {
@@ -57,7 +60,7 @@
     font-size: 1.3rem;
     padding: 0.5rem;
     border-radius: 0.5rem;
-    background-color: rgb(117, 117, 117);
+    background-color: #1b3073;
     color: white;
   }
 }
