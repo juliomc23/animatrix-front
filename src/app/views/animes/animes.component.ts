@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, inject, signal } from '@angular/core';
 import { AnimesService } from './services/animes.service';
 import { CreateResourceDialogComponent } from '../../components/create-resource-dialog/create-resource-dialog.component';
 import { ResourceCardComponent } from '../../components/resource-card/resource-card.component';
@@ -14,6 +14,7 @@ export class AnimesComponent implements OnInit {
   private animesService = inject(AnimesService);
 
   $animes = this.animesService.getAnimes();
+  $resourceModalOpen = signal<boolean>(false);
 
   ngOnInit() {
     this.getAnimesSubscription();
@@ -23,5 +24,9 @@ export class AnimesComponent implements OnInit {
     this.animesService.getAnimesSubscription().subscribe({
       next: (animes) => this.animesService.setAnimes(animes),
     });
+  }
+
+  openModal() {
+    this.$resourceModalOpen.set(true);
   }
 }

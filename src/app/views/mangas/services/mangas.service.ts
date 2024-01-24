@@ -22,6 +22,14 @@ export class MangasService {
     });
   }
 
+  getSingleMangaSubscription(id: number) {
+    return this.httpClient.get<Manga>(`http://localhost:3000/manga/${id}`, {
+      headers: {
+        Authorization: `Bearer ${this.tokenService.getAccessToken()}`,
+      },
+    });
+  }
+
   createManga(manga: Partial<Manga>) {
     return this.httpClient.post<Manga>('http://localhost:3000/manga', manga, {
       headers: {
@@ -58,6 +66,16 @@ export class MangasService {
 
   setMangas(mangas: Manga[]) {
     this.$mangas.set(mangas);
+  }
+
+  setEditedManga(manga: Manga) {
+    this.$mangas.update((mangas) => {
+      const index = mangas.findIndex((a) => a.id === manga.id);
+      if (index !== -1) {
+        mangas[index] = manga;
+      }
+      return mangas;
+    });
   }
 
   setNewManga(manga: Manga) {

@@ -4,6 +4,7 @@ import {
   WritableSignal,
   effect,
   inject,
+  signal,
 } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CreateResourceDialogComponent } from '../../components/create-resource-dialog/create-resource-dialog.component';
@@ -27,6 +28,7 @@ export class MangasComponent {
   private mangasService = inject(MangasService);
 
   $mangas: WritableSignal<Manga[]> = this.mangasService.getMangas();
+  $resourceModalOpen = signal<boolean>(false);
 
   constructor() {
     effect(() => {
@@ -49,5 +51,9 @@ export class MangasComponent {
 
   getMangas() {
     this.$mangas = this.mangasService.getMangas();
+  }
+
+  openModal() {
+    this.$resourceModalOpen.set(true);
   }
 }

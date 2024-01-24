@@ -8,4 +8,24 @@
   align-items: center;
   box-sizing: border-box;
   background-color: azure;
+
+  .button__create-resource {
+    all: unset;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    background-color: #e83c39;
+    color: black;
+    padding: 0.5rem 1rem;
+    border: 1px solid black;
+    border-radius: 0.5rem;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 1.25rem;
+
+    .material-icons {
+      font-size: 2rem;
+    }
+  }
 }

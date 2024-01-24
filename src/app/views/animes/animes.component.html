@@ -1,4 +1,10 @@
-<app-create-resource-dialog resourceType="anime" />
+<button (click)="openModal()" class="button__create-resource">
+  <span class="material-icons"> add </span>Create new anime
+</button>
+<app-create-resource-dialog
+  resourceType="anime"
+  [$resourceModalOpen]="$resourceModalOpen"
+/>
 @for(anime of $animes(); track anime.name){
 <app-resource-card resourceType="anime" [animeResource]="anime" />
 }@empty {

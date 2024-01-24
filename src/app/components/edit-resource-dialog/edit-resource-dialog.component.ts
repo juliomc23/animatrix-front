@@ -1,10 +1,17 @@
-import { NgClass } from '@angular/common';
-import { Component, Input, OnInit, inject, signal } from '@angular/core';
-import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import {
+  Component,
+  Input,
+  OnChanges,
+  OnInit,
+  inject,
+  signal,
+} from '@angular/core';
+import { FormGroup, FormControl, ReactiveFormsModule } from '@angular/forms';
 import { AnimeResponse } from '../../views/animes/interfaces/anime.interface';
 import { AnimesService } from '../../views/animes/services/animes.service';
 import { Manga } from '../../views/mangas/interfaces/manga.interface';
 import { MangasService } from '../../views/mangas/services/mangas.service';
+import { NgClass } from '@angular/common';
 
 type MangaFormGroup = {
   name: FormControl<string>;
@@ -16,15 +23,16 @@ type MangaFormGroup = {
 };
 
 @Component({
-  selector: 'app-create-resource-dialog',
+  selector: 'app-edit-resource-dialog',
   standalone: true,
-  imports: [ReactiveFormsModule, NgClass],
-  templateUrl: './create-resource-dialog.component.html',
-  styleUrl: './create-resource-dialog.component.css',
+  imports: [NgClass, ReactiveFormsModule],
+  templateUrl: './edit-resource-dialog.component.html',
+  styleUrl: './edit-resource-dialog.component.css',
 })
-export class CreateResourceDialogComponent implements OnInit {
+export class EditResourceDialogComponent implements OnInit, OnChanges {
   @Input({ required: true }) resourceType!: 'anime' | 'manga';
   @Input({ required: true }) $resourceModalOpen = signal<boolean>(false);
+  @Input({ required: true }) resourceId!: number;
 
   private mangasService = inject(MangasService);
   private animesService = inject(AnimesService);
@@ -93,21 +101,29 @@ export class CreateResourceDialogComponent implements OnInit {
     this.asignFormGroup();
   }
 
-  createResource() {
+  ngOnChanges() {
+    this.getSingleResource(this.resourceType, this.resourceId);
+  }
+
+  editResource() {
     if (this.resourceType === 'manga') {
       const newManga = this.getMangaFormValues();
-      this.mangasService.createManga(newManga).subscribe({
-        next: (res) => {
-          this.mangasService.setNewManga(res);
-        },
-      });
+      this.mangasService
+        .editMangaSubscription(this.resourceId, newManga)
+        .subscribe({
+          next: (res) => {
+            this.mangasService.setEditedManga(res);
+          },
+        });
     }
 
     if (this.resourceType === 'anime') {
       const newAnime = this.getAnimeFormValues();
-      this.animesService.createAnimeSubscription(newAnime).subscribe({
-        next: (res) => this.animesService.setNewAnime(res),
-      });
+      this.animesService
+        .editAnimeSubscription(this.resourceId, newAnime)
+        .subscribe({
+          next: (res) => this.animesService.setEditedAnime(res),
+        });
     }
 
     this.resourceFormGroup.reset();
@@ -115,5 +131,37 @@ export class CreateResourceDialogComponent implements OnInit {
 
   closeModal() {
     this.$resourceModalOpen.set(false);
+  }
+
+  getSingleResource(resourceType: 'anime' | 'manga', id: number) {
+    if (resourceType === 'anime' && this.resourceId) {
+      this.animesService.getSingleAnimeSubscription(id).subscribe({
+        next: (res) => {
+          this.resourceFormGroup.setValue({
+            name: res.name,
+            episode: res.episode,
+            episodeMinute: res.episodeMinute,
+            nextEpisode: res.nextEpisode ?? null,
+            url: res.url,
+            comment: res.comment ?? null,
+          });
+        },
+      });
+    }
+
+    if (resourceType === 'manga' && this.resourceId) {
+      this.mangasService.getSingleMangaSubscription(id).subscribe({
+        next: (res) => {
+          this.resourceFormGroup.setValue({
+            name: res.name,
+            chapter: res.chapter,
+            chapterPage: res.chapterPage,
+            nextChapter: res.nextChapter ?? null,
+            url: res.url,
+            comment: res.comment ?? null,
+          });
+        },
+      });
+    }
   }
 }

@@ -21,7 +21,6 @@ export class AppComponent {
   constructor() {
     effect(() => {
       this.actualRoute = this.routerService.getRoute();
-      console.log(this.actualRoute);
     });
   }
 }

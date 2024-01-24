@@ -22,6 +22,17 @@ export class AnimesService {
     });
   }
 
+  getSingleAnimeSubscription(id: number) {
+    return this.httpClient.get<AnimeResponse>(
+      `http://localhost:3000/anime/${id}`,
+      {
+        headers: {
+          Authorization: `Bearer ${this.tokenService.getAccessToken()}`,
+        },
+      }
+    );
+  }
+
   createAnimeSubscription(anime: Partial<AnimeResponse>) {
     return this.httpClient.post<AnimeResponse>(
       'http://localhost:3000/anime',
@@ -62,6 +73,16 @@ export class AnimesService {
 
   setAnimes(animes: AnimeResponse[]) {
     this.$animes.set(animes);
+  }
+
+  setEditedAnime(anime: AnimeResponse) {
+    this.$animes.update((animes) => {
+      const index = animes.findIndex((a) => a.id === anime.id);
+      if (index !== -1) {
+        animes[index] = anime;
+      }
+      return animes;
+    });
   }
 
   setNewAnime(anime: AnimeResponse) {

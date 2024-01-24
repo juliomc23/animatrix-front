@@ -1,4 +1,10 @@
-<app-create-resource-dialog resourceType="manga" />
+<button (click)="openModal()" class="button__create-resource">
+  <span class="material-icons"> add </span>Create new manga
+</button>
+<app-create-resource-dialog
+  resourceType="manga"
+  [$resourceModalOpen]="$resourceModalOpen"
+/>
 @for(manga of $mangas(); track manga.name){
 <app-resource-card resourceType="manga" [mangaResource]="manga" />
 }@empty {
